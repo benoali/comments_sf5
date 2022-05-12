@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ username }}!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ username }}!</h1>
+
+    <div>
+        {{ article.attributes.title }}
+    </div>
+    <div>
+        {{ article.attributes.content }}
+    </div>
+    <div>
+        <ul>
+            {% for comment in article.attributes.comments %}
+                <li>{{ comment.attributes.text }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+    <a href="/logout">logout</a>
+{% endblock %}
