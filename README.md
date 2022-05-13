@@ -10,6 +10,9 @@
 
 ### Créer une base de données locale et mettre en place les paramètres dans le fichier .env
 
+### Génerer le table en local
+``php bin/console doctrine:schema:update --force``
+
 ### Configuer un Host locale ou lancer le build-in serveur de symfony
 
 ``symfony server:start`` et aller sur l'url indiquée https://127.0.0.1:8000
