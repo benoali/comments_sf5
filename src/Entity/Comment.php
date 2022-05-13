@@ -36,7 +36,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $article;
 
@@ -92,5 +92,10 @@ class Comment
         $this->article = $article;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }

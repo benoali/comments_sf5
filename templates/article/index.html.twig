@@ -20,9 +20,18 @@
     <div>
         <ul>
             {% for comment in article.attributes.comments %}
-                <li>{{ comment.attributes.text }}</li>
+                <li style="border: #999999 solid 1px;">{{ comment.attributes.text }}</li>
             {% endfor %}
         </ul>
+        <div id="add_comment">
+            Ajouter un commentaire:
+                {{ form_start(form) }}
+                {{ form_widget(form.text) }}
+
+                {{ form_rest(form) }}
+                <button type="submit">Ajouter</button>
+                {{ form_end(form) }}
+        </div>
     </div>
 
 </div>

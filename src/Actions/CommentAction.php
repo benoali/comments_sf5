@@ -37,12 +37,20 @@ class CommentAction
         $article = $this->articleRepository->find($requestParams['article']);
         $requestParams['article'] = $article;
 
-        $parent = $this->commentRepository->find($requestParams['parent']);
+        $parent = null;
+        if ($requestParams['parent'] ?? false) {
+            $parent = $this->commentRepository->find($requestParams['parent']);
+        }
+
+        $article = $requestParams['article'];
+        if (null !== $parent) {
+            $article = null;
+        }
 
         $comment = new Comment();
-        $comment->setTitle($requestParams['title']);
+        $comment->setTitle($requestParams['title'] ?? null);
         $comment->setText($requestParams['text']);
-        $comment->setArticle($requestParams['article']);
+        $comment->setArticle($article);
         $comment->setParent($parent);
 
         $this->commentRepository->add($comment, true);
@@ -53,31 +61,4 @@ class CommentAction
     public function getArticle(int $id) {
         return $this->articleRepository->find($id);
     }
-
-/*
-    public function getKnigth(int $id) {
-        return $this->articleRepository->find($id);
-    }
-
-    public function getArticles() {
-        return $this->articleRepository->findAll();
-    }
-
-    private function resolve(array $data): array
-    {
-        return (new OptionsResolver())
-            ->setRequired(['power', 'strength', 'weaponPower'])
-            ->setNormalizer('power', function (Options $options, $data) {
-                return intval($data);
-            })
-            ->setNormalizer('strength', function (Options $options, $data) {
-                return intval($data);
-            })
-            ->setNormalizer('weaponPower', function (Options $options, $data) {
-                return intval($data);
-            })
-            ->resolve($data)
-            ;
-    }
-*/
 }
